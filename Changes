@@ -1,0 +1,6 @@
+0.02
+	- rework to operate more like the redo operator (significant speed
+	  improvement and less kludgy semantics, but more cargo cult)
+
+0.01
+	- Initial release
