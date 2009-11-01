@@ -22,3 +22,55 @@ pop our @ISA;
 __PACKAGE__
 
 __END__
+
+=pod
+
+=head1 NAME
+
+Sub::Call::Recur - Self recursive tail call invocation.
+
+=head1 SYNOPSIS
+
+    sub fact {
+        my ( $n, $accum ) = @_;
+
+        $accum ||= 1;
+
+        if ( $n == 0 ) {
+            return $accum;
+        } else {
+            recur( $n - 1, $n * $accum );
+        }
+    }
+
+=head1 DESCRIPTION
+
+This module implements Clojure's C<recur> special form.
+
+C<recur> is a tail call to the current function. It is a bit like assigning the
+arguments to C<@_> and invoking a C<goto> to the first expression of the
+subroutine.
+
+THis allows functional style looping with constant stack space.
+
+=head1 SEE ALSO
+
+L<Sub::Call::Tail>
+
+L<B::Hooks::OP::Check::EntersubForCV>
+
+=head1 VERSION CONTROL
+
+L<http://github.com/nothingmuch/Sub-Call-Recur>
+
+=head1 AUTHOR
+
+Yuval Kogman
+
+=head1 COPYRIGHT & LICENSE
+
+	Copyright (c) 2009 Yuval Kogman. All rights reserved
+	This program is free software; you can redistribute
+	it and/or modify it under the same terms as Perl itself.
+
+=cut
