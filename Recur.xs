@@ -14,8 +14,7 @@
 #define AvREIFY_only(av)	(AvREIFY_off(av), AvREAL_on(av))
 #endif
 
-
-static OP *recur () {
+static OP *recur (pTHX) {
     dVAR; dSP; dMARK; dITEMS;
 
     IV cxix = cxstack_ix;
