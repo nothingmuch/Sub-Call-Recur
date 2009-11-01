@@ -71,6 +71,17 @@ static OP *recur () {
 
         MY_CXT.fakeop.op_next = NULL;
 
+        /* TODO
+         *
+         * instead of doing a return and then short circuiting to entersub all
+         * over again ideally we should do something like the redo op, except
+         * jumping to CvSTART(cv).
+         *
+         *     stash args, dounwind() like pp_redo to cxix = sub + 1, then
+         *     LEAVE and ENTER to refresh the lexicals and fix up @_ again,
+         *     RETURNOP(CvSTART(cv))
+         */
+
         return nextop;
     }
 }
