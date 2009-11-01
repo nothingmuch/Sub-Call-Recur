@@ -36,10 +36,7 @@ static OP *recur (pTHX) {
         I32 gimme = cx->blk_gimme;
         AV *av = cx->blk_sub.argarray;
 
-        POPs; /* discard the CV for recur itself */
-        PUTBACK;
-
-        items--;
+        POPs; PUTBACK; /* discard the GV that was added for entersub */
 
         /* undwind to top level */
         if ( cxix < cxstack_ix )
@@ -96,7 +93,20 @@ static OP *recur (pTHX) {
 }
 
 STATIC OP *install_recur_op (pTHX_ OP *o, CV *cv, void *user_data) {
+
+    OP *prev = ((cUNOPo->op_first->op_sibling) ? cUNOPo : ((UNOP*)cUNOPo->op_first))->op_first;
+    OP *o2 = prev->op_sibling;
+    OP *cvop;
+
+    for (cvop = o2; cvop->op_sibling; cvop = cvop->op_sibling);
+
+    /* disable the cv push op, so that we don't need to pop the GV for recur
+     * itself */
+    cvop->op_ppaddr = PL_ppaddr[OP_NULL];
+    ((UNOP *)cvop)->op_first->op_ppaddr = PL_ppaddr[OP_NULL];
+
     o->op_ppaddr = recur;
+
     return o;
 }
 
