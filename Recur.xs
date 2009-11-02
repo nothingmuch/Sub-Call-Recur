@@ -11,7 +11,7 @@
 
 
 #ifndef AvREIFY_only
-#define AvREIFY_only(av)	(AvREIFY_off(av), AvREAL_on(av))
+#define AvREIFY_only(av)	(AvREAL_off(av), AvREIFY_on(av))
 #endif
 
 static OP *recur (pTHX) {
