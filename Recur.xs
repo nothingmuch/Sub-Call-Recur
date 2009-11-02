@@ -60,8 +60,8 @@ static OP *recur (pTHX) {
         AvFILLp(av) = items - 1;
 
         while (MARK <= SP) {
-            if (*MARK) {
-                if ( SvTEMP(*MARK) || SvPADMY(*MARK) ) {
+            if (*SP) {
+                if ( SvTEMP(*SP) || SvPADMY(*SP) ) {
                     I32 key;
 
                     key = AvMAX(av) + 1;
@@ -82,8 +82,10 @@ static OP *recur (pTHX) {
                     break;
                 }
             }
-            MARK++;
+            SP--;
         }
+
+        PUTBACK;
 
         LEAVE;
         ENTER;
