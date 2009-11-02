@@ -36,7 +36,7 @@ static OP *recur (pTHX) {
         I32 gimme = cx->blk_gimme;
         AV *av = cx->blk_sub.argarray;
 
-        POPs; PUTBACK; /* discard the GV that was added for entersub */
+        // POPs; PUTBACK; /* discard the GV that was added for entersub */
 
         /* undwind to top level */
         if ( cxix < cxstack_ix )
