@@ -88,6 +88,7 @@ static OP *recur (pTHX) {
         PUTBACK;
 
         LEAVE;
+        FREETMPS;
         ENTER;
 
         SAVECOMPPAD();
