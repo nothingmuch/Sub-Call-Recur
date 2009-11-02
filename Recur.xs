@@ -90,6 +90,10 @@ static OP *recur (pTHX) {
         LEAVE;
         ENTER;
 
+        SAVECOMPPAD();
+        PAD_SET_CUR_NOSAVE(CvPADLIST(cv), CvDEPTH(cv));
+
+
         RETURNOP(CvSTART(cv));
     }
 }
