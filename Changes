@@ -1,3 +1,9 @@
+0.03
+	- Reset curpad after LEAVE
+	- also FREETMPS between each invocation
+	- fix off by one stack bug
+	- set SP back
+
 0.02
 	- rework to operate more like the redo operator (significant speed
 	  improvement and less kludgy semantics, but more cargo cult)
